@@ -1,0 +1,261 @@
+:root {
+    --main-clr: #181a1b
+    --sub-clr: #454748
+    --main-txt: #9c9e9f
+    --sub-txt: #c5c7c8
+    --bdr-clr: #373c3e
+}
+
+*, ::before, ::after {
+    box-sizing: border-box
+
+    font-synthesis: none
+    text-rendering: optimizeLegibility
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    -webkit-text-size-adjust: 100%
+    user-select: none
+}
+
+html {
+    scroll-behavior: smooth
+}
+
+body {
+    margin: 0
+    padding: 0
+    background-color: var(--main-clr)
+    color: var(--main-txt)
+    font-family: "Helvetica Neue", "Arial", "Hiragino Sans", "Meiryo", sans-serif
+
+    > div {
+        position: relative
+        min-height: 100vh
+        overflow: hidden
+    }
+}
+
+ul {
+    margin: 0
+    padding: 0
+    list-style: none
+}
+
+li {
+    cursor: pointer
+}
+
+button {
+    padding: 0
+    background: none
+    color: var(--main-txt)
+    border: 1px solid var(--bdr-clr)
+    transition: border .3s,  opacity .3s
+    cursor: pointer
+}
+
+svg {
+    fill: var(--sub-clr)
+}
+
+rectangle(width = 0px, height= 0px) {
+    width: width
+    height: height
+}
+
+square(val = 0px) {
+    width: val
+    height: val
+}
+
+.container, .app-container {
+    margin: auto
+    padding: 0 16px
+    width: 928px
+}
+
+.app-container .inner {
+    flex: 3
+    //aspect-ratio: 1/1
+}
+
+header li, .header li {
+    position: relative
+
+    &[aria-current="true"] {
+        cursor: default
+
+        &::after {
+            content: ""
+            position: absolute
+            left: -2px
+            bottom: -4px
+            width: 110%
+            border-bottom: 4px solid var(--sub-txt)
+            animation: indicator-anim .3s
+        }
+        
+        @keyframes indicator-anim {
+            0% {
+                width: 0%
+            }
+            100% {
+                width: 110%
+            }
+        }
+    }
+}
+
+.header, .list-frm {
+    ul {
+        display: grid
+        grid-gap: 16px
+    }
+
+    li {
+        display: flex
+        align-items: center
+        justify-content: center
+    }
+}
+
+.header {
+    display: flex
+    padding: 0 8px
+    justify-content: space-between
+
+    ul {
+        grid-template-columns: repeat(2, 1fr)
+    }
+}
+
+h2 {
+    font-size: 1rem
+}
+
+.list-frm {
+    padding: 24px 0
+    height: 100%
+    border-top: 1px solid var(--bdr-clr)
+
+    ul {
+        max-height: 100%
+        grid-template-columns: repeat(6, 1fr)
+        overflow: auto
+    }
+
+    li {
+        border-radius: 8px
+        aspect-ratio: 1/1
+
+        &[aria-current="true"] {
+            cursor: default
+            border: 3px solid var(--sub-txt)
+            animation: pointer-anim 4s infinite
+        }
+    }
+}
+
+@keyframes pointer-anim {
+    0% {
+        border-color: #fff
+    }
+    15% {
+        border-color: #ccc
+    }
+    30% {
+        border-color: #eee
+    }
+    70% {
+        border-color: #ccc
+    }
+    100% {
+        border-color: #fff
+    }
+}
+
+.list-frm.pos {
+    padding: 24px 0
+    height: 100%
+    border-top: 1px solid var(--bdr-clr)
+
+    ul {
+        display: block
+    }
+
+    li {
+        display: flex
+        aspect-ratio: auto
+        cursor: default
+
+        > div:first-of-type, > div:last-of-type {
+            display: flex
+            square(64px)
+            align-items: center
+            justify-content: center
+        }
+    }
+}
+
+canvas {
+    margin-top: 80px
+    width: 100%
+    aspect-ratio: 1/1
+}
+
+.overlay {
+    position: fixed
+    inset: 0
+    rectangle(100%, 100vh)
+    background-color: var(--main-clr)
+}
+
+mp-space = 24px
+
+.modal {
+    position: absolute
+    top: 50%
+    left: 50%
+    padding: mp-space
+    background-color: var(--main-clr)
+    color: var(--sub-txt)
+    border-radius: 8px
+    transform: translate(-50%, -50%)
+
+    > .txt-frm {
+        margin: mp-space 0
+
+        > p {
+            margin: 0
+            text-align: center
+            white-space: pre-line
+        }
+    }
+
+    > .btn-frm {
+        display: flex
+    }
+
+    & button {
+        rectangle(256px, 48px)
+        border-radius: 100vh
+        font-size: 1rem
+        font-weight: 700
+        transition: opacity .3s
+
+        &:nth-child(2) {
+            margin-left: mp-space
+            background-color: var(--sub-txt)
+            color: var(--main-clr)
+            border: none
+        }
+
+        &:hover {
+            opacity: .8
+        }
+    }
+}
+
+.img-frm > img {
+    square(400px)
+}
